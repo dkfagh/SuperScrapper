@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, send_file
 from scrapper import get_jobs
+from exporter import save_to_file
 
 app = Flask("SuperScrapper")
 
@@ -61,7 +62,12 @@ def export():
         if not jobs:
             raise Exception()
 
-        return f"Generate CSV for {word}"
+        # CSV writer로 jobs 파일 생성
+        save_to_file(jobs)
+
+        # as_attachment : 파일명 그대로 다운
+        # chrome은 안되고 edge에서는 됨
+        return send_file("jobs.csv", as_attachment=True)
 
     except:
         return redirect("/")        
