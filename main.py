@@ -24,12 +24,12 @@ def report():
         word = word.lower()
 
         # 입력받은 검색어가 db에 있는지 확인
-        fromDb = db.get(word)
+        existingJobs = db.get(word)
 
         # 검색한 단어가 db에 저장되어 있다면
         #   = 이전에 검색한 기록이 있다면
-        if fromDb:
-            jobs = fromDb
+        if existingJobs:
+            jobs = existingJobs
         else:
             jobs = get_jobs(word)
 
@@ -42,7 +42,7 @@ def report():
 
     # rendering (변수를 전달)
     return render_template(
-        "report.html", resultsNumber=len(jobs), searchingWord=word)
+        "report.html", resultsNumber=len(jobs), searchingWord=word, jobs=jobs)
 
 
 app.run(host="0.0.0.0")
