@@ -45,4 +45,26 @@ def report():
         "report.html", resultsNumber=len(jobs), searchingWord=word, jobs=jobs)
 
 
+@app.route("/export")
+def export():
+    try:
+        word = request.args.get("word")
+        
+        # Exception(=Error) 강제 발생 -> except 실행
+        if not word:
+            raise Exception()
+
+        word = word.lower()
+        jobs = db.get(word)
+
+        # 내보낼 CSV가 없을 경우 home으로 redirect
+        if not jobs:
+            raise Exception()
+
+        return f"Generate CSV for {word}"
+
+    except:
+        return redirect("/")        
+
+
 app.run(host="0.0.0.0")
