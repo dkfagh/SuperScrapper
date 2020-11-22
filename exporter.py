@@ -10,7 +10,7 @@ def save_to_file(jobs):
     writer = csv.writer(file)
 
     # 첫 행(row) 입력
-    writer.writerow(["title", "company", "location", "link"])
+    writer.writerow(["Title", "Company", "Location", "Link"])
 
     for job in jobs:
         # 파라미터로 받은 jobs의 job에서 각 값들만 뽑아서(divtionary의 value 기능) 리스트화시킨 후 writer로 입력

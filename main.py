@@ -70,7 +70,7 @@ def export():
         return send_file("jobs.csv", as_attachment=True)
 
     except:
-        return redirect("/")        
+        return redirect("/")
 
 
 app.run(host="0.0.0.0")
